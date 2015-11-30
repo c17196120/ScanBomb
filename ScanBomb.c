@@ -3,7 +3,7 @@
 int main()
 {
 	int x, y, i = N-1, j = N-1;
-	char b[N][N];
+	char b[N][N] = {0};
 	/*for (; i > 0; i--)
 		for (; j > 0; j--)
 			b[i][j] = 'o';
@@ -11,11 +11,11 @@ int main()
 	scanf("%d %d", &x, &y);*/
 	for (; i > 0; i--)
 	{
-		for (; j > 0; j--)
+		for (j = N-1; j > 0; j--)
 		{
 		b[i][j] = '*';
 		}
-		b[i][N] = '\0';
+		b[i][N-1] = '\0';
 	}
 		
 		
