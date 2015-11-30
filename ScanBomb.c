@@ -1,52 +1,62 @@
 #include<stdio.h>
 #include<time.h>
 #include<stdlib.h>
-#include <windows.h>
 #define N 10
 
 int random(int m, int n)
 {
-	srand((unsigned)time(0));
-	m = rand() % N +1;
-	n = rand() % N +1;
-	//Sleep(200);
+	m = rand() % N + 1;
+	n = rand() % N + 1;
 	return m, n;
+}
+int detector(int xAxis, int yAxis)
+{
+
 }
 
 int main()
 {
-	int x, y, i, j, k;
-	int m[N], n[N];
-	char b[N][N] = {0};
-	/*for (; i > 0; i--)
-		for (; j > 0; j--)
-			b[i][j] = 'o';
- 	printf("请输入雷区范围（x < 21，y < 21）：");   //输入雷区范围用代码
-	scanf("%d %d", &x, &y);*/
+	int x, y, k, xAxis, yAxis;
+	int B[N][2];
+	char b[N][N] = { 0 };
+	srand((unsigned)time(0));
 
-	/*for (i = 0; i < N; i++)
-	{
-		for (j = 0; j < N; j++)
-		{
-		b[i][j] = '*';
-		}
-	}
-	
 	for (x = 0; x < N; x++)
 	{
-		for (y = 0; y <N; y++)
-			printf("%c", b[x][y]);
+		for (y = 0; y < N; y++)
+		{
+			b[x][y] = '*';
+			printf("%c", b[x][y]);  //制造场地
+		}
 		printf("\n");
-	}*/
+	}
 
-	for (k = 0; k < 10; k++)
+	for (k = 0; k < 10; k++)  //取十颗雷的位置
 	{
-		m[k] = random(m[k], n[k]);
-		n[k] = random(m[k], n[k]);
+		B[k][0] = random(B[k][0], B[k][1]);
+		B[k][1] = random(B[k][0], B[k][1]);
 	}
 	for (k = 0; k < 10; k++)
 	{
-		printf("%d%d\n", m[k], n[k]);
+		printf("%d%d\n", B[k][0], B[k][1]);
 	}
-	
+	printf("请输入将要扫描的位置(x,y)：\n>");
+	scanf("%d%d", &xAxis, &yAxis);
+	for (int i = 0; i < N; i++)
+	{
+		if (B[i][0] == xAxis)
+		{
+			for (int j = 0; j < N; j++)
+			{
+				if (B[j][1] == yAxis)
+				{
+					printf("You Lose!\n");  //判断是否踩雷
+					goto quit;
+				}
+			}
+		}
+	}
+
+quit:
+	return 0;
 }
